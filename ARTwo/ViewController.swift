@@ -24,11 +24,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
+        let scene = SCNScene()
+        let position = SCNVector3Make(0, -0.5, -0.5)
+        let scale = SCNVector3Make(0.5, 0.5, 0.5)
+        let myText = creatText(at: position, by: scale)
+        
+        scene.rootNode.addChildNode(myText)
+            
         // Set the scene to the view
         sceneView.scene = scene
     }
+    
+    func creatText(at position: SCNVector3, by scale: SCNVector3) -> SCNNode {
+        let text = SCNText(string: "PANKAJ KUMAR NIGAM", extrusionDepth: 0.0)
+        text.firstMaterial?.diffuse.contents = UIColor.red
+        text.font = UIFont(name: "Helvetica", size: 10.0)
+        
+        let textNode = SCNNode(geometry: text)
+        textNode.position = position
+        textNode.scale = scale
+        
+        return textNode
+    }
+        
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
